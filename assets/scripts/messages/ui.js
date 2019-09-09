@@ -1,31 +1,21 @@
 'use strict'
 
 const store = require('../store')
+const showMessagesTemplate = require('../templates/messages.handlebars')
+const showMessageTemplate = require('../templates/message.handlebars')
 
 const getMessagesSuccess = data => {
   const messages = data.messages.reverse()
-  let showMessagesHtml = ''
-  messages.forEach(message => {
-    showMessagesHtml += `
-    <li id="${message._id}">
-      <span>${message.owner.username}: </span>
-      <span>${message.message} </span>
-      <button data-id="${message._id}" class="delete-message">Delete</button>
-      <button data-id="${message._id}" class="edit-message">Edit</button>
-    </li>`
-  })
-  $('.content').find('ul').html(showMessagesHtml)
+  const showMessagesHtml = showMessagesTemplate({ messages })
+  $('.content')
+    .find('ul')
+    .html(showMessagesHtml)
   store.messages = messages
 }
 
 const appendMessage = data => {
-  const showMessageHtml = `
-  <li id="${data.message._id}">
-    <span>${data.message.owner.username}: </span>
-    <span>${data.message.message} </span>
-    <button data-id="${data.message._id}" class="delete-message">Delete</button>
-    <button data-id="${data.message._id}" class="edit-message">Edit</button>
-  </li>`
+  const message = data.message
+  const showMessageHtml = showMessageTemplate({ message })
   $('.content')
     .find('ul')
     .prepend(showMessageHtml)
@@ -33,13 +23,7 @@ const appendMessage = data => {
 }
 
 const replaceMessage = message => {
-  const showMessageHtml = `
-  <li id="${message._id}">
-    <span>${message.owner.username}: </span>
-    <span>${message.message} </span>
-    <button data-id="${message._id}" class="delete-message">Delete</button>
-    <button data-id="${message._id}" class="edit-message">Edit</button>
-  </li>`
+  const showMessageHtml = showMessageTemplate({ message })
   $('#' + message._id)
     .replaceWith(showMessageHtml)
 }

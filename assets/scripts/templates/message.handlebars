@@ -1,0 +1,8 @@
+<li id="{{message._id}}">
+  <span class="username">{{message.owner.username}}: </span>
+  <span class="message">{{message.message}} </span>
+  {{#if (isowner message.owner._id)}}
+  <button data-id="{{message._id}}" class="delete-message">Delete</button>
+  <button data-id="{{message._id}}" class="edit-message">Edit</button>
+  {{/if}}
+</li>

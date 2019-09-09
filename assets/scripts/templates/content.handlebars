@@ -1,0 +1,10 @@
+<div>
+  Lastest Messages
+</div>
+{{#if (getuser)}}
+<form class="send-message" autocomplete="off">
+  <textarea name="message[message]" placeholder="What's up?" required></textarea>
+  <button>Send</button>
+</form>
+{{/if}}
+{{> messages messages=messages}}
