@@ -1,7 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~animate.css/animate.css';
 
-.message-container {
+.alerts-container {
   @include media-breakpoint-up(sm) {
     @include make-col(8);
   }

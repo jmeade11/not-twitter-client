@@ -1,18 +1,18 @@
 'use strict'
 
-const $messages = $('#messages')
+const $alerts = $('#alerts')
 
-const showAlert = (message, type) => {
+const showAlert = (content, type) => {
   const alertTemplate = `
   <div class="alert-${type} alert alert-dismissible fade show animated bounceInLeft" role="alert">
-    ${message}
+    ${content}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>`
 
   const $alert = $(alertTemplate)
-    .appendTo($messages)
+    .appendTo($alerts)
 
   setTimeout(() => {
     $alert
