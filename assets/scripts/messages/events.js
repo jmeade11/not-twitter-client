@@ -15,12 +15,6 @@ const onGetMessages = () => {
     .catch(ui.failure)
 }
 
-const onGetMessage = id => {
-  api.getMessage(id)
-    .then(ui.replaceMessage)
-    .catch(ui.failure)
-}
-
 const onSendMessage = event => {
   event.preventDefault()
   if (!socket.connected) {
@@ -47,7 +41,7 @@ const onUpdateMessage = event => {
   const formData = getFormFields(form)
   formData.message._id = event.target.parentElement.id
   api.updateMessage(formData)
-    .then(() => onGetMessage(formData.message._id))
+    .then(ui.replaceMessage)
     .catch(ui.failure)
 }
 

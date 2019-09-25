@@ -1,15 +1,13 @@
 'use strict'
 
 const store = require('../store')
-const showMessagesTemplate = require('../templates/messages.handlebars')
+const showContentTemplate = require('../templates/content.handlebars')
 const showMessageTemplate = require('../templates/message.handlebars')
 
 const getMessagesSuccess = data => {
   const messages = data.messages.reverse()
-  const showMessagesHtml = showMessagesTemplate({ messages })
-  $('.content')
-    .find('ul')
-    .html(showMessagesHtml)
+  const showMessagesHtml = showContentTemplate({ messages })
+  $('.content').html(showMessagesHtml)
   store.messages = messages
 }
 
@@ -22,9 +20,9 @@ const appendMessage = data => {
   store.messages.push(data)
 }
 
-const replaceMessage = message => {
-  const showMessageHtml = showMessageTemplate({ message })
-  $('#' + message._id)
+const replaceMessage = data => {
+  const showMessageHtml = showMessageTemplate(data)
+  $('#' + data.message._id)
     .replaceWith(showMessageHtml)
 }
 
